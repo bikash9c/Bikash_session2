@@ -1,17 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Embedding Explorer</title>
+    <title>Word Embedding Explorer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-    <h1>Word Embedding Explorer</h1>
-    <form method="POST">
-        <label>Enter words (comma-separated):</label><br>
-        <input type="text" name="words" size="60" required><br><br>
-        <button type="submit">Explore</button>
-    </form>
-    {% if error %}
-        <p style="color:red;">{{ error }}</p>
-    {% endif %}
+    <div class="container">
+        <h1>Word Embedding Explorer</h1>
+        <form method="POST">
+            <label for="words">Enter words (comma-separated):</label>
+            <input type="text" name="words" id="words" required value="{{ request.form.words if request.form.words }}">
+            <button type="submit">Explore</button>
+        </form>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
 </body>
 </html>
